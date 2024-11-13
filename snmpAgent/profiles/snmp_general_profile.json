@@ -1,0 +1,6 @@
+{
+  "queriedOID": "$OID$",
+  "OIDdata": "$oid_data$",
+  "dataType": "$Type$",
+  "dataValue": "$Value$"
+}

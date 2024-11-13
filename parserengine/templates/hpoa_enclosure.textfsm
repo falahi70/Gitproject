@@ -1,0 +1,10 @@
+Value Required type (.*)
+Value sparepartnumber (.*)
+Value partnumber (.*)
+Value serialnumber (.*)
+
+Start
+	^\s+Enclosure Type\:\s${type}
+	^\s+Part Number\:\s${partnumber}
+	^\s+Serial Number\:\s${serialnumber}
+	^\s+Midplane Spare Part Number\:\s${sparepartnumber} -> Record

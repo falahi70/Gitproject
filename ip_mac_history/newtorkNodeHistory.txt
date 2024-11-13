@@ -1,0 +1,32 @@
+|   search      resourcetype        =   "snmpDiscovery"
+            and status              =   "Enabled"
+|   fields  key         as  snmpDiscoveryKey,
+            name        as  snmpDiscoveryName,
+            ipAddress   as  snmpIpAddress,
+            portNumber  as  snmpPortNumber,
+            @credential as  snmpCredential
+|join               @outer.snmpCredential=@inner.credName
+                    [
+                        |search     resourcetype ="credentialProfile"
+                                and credType ~  "SNMP"
+                        |fields     key as  credentialProfile,
+                                    name    as  credName,
+                                    credType
+                    ]
+|eval               snmpIpAddress:=longtoip(snmpIpAddress),
+                    version:=case(  credType = "SNMP v3" , "3",
+                                    credType = "SNMP v2" , "2",
+                                    credType = "SNMP v1" , "1"),
+                  command                 := "cd snmpAgent;python main.py -i " +snmpIpAddress+ " -c "+ credName +" -o "+$snmpDiscoveryArpOid1$ +" -v "+ version
+
+| snippet "send_command_to_remote_commander"
+|spath  input := result  path := "[]" output :=  item
+|mvexpand   item
+|search     result != null
+|fields     -result
+|spath  input := item  path := "oid_data" output := networkNodeIpAddress:string
+|spath  input := item  path := "Value" output := macAddress:string
+|fields     _item.snmpDiscoveryKey as  discoveryNode,
+            networkNodeIpAddress,
+            macAddress, _item.snmpIpAddress as scannedip
+| eval  scanid := $scanid$+1

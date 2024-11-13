@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../BRCO/Python Codes/04- CoreInspect/parserengine/.idea/ParserEngine.iml" filepath="$PROJECT_DIR$/../BRCO/Python Codes/04- CoreInspect/parserengine/.idea/ParserEngine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../BRCO/Python Codes/02- CoreTIS/CoreTIS_Feeders/ThreatIntelligence/.idea/ThreatIntelligence.iml" filepath="$PROJECT_DIR$/../BRCO/Python Codes/02- CoreTIS/CoreTIS_Feeders/ThreatIntelligence/.idea/ThreatIntelligence.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/cisco_modules_automate.iml" filepath="$PROJECT_DIR$/.idea/cisco_modules_automate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../BRCO/Python Codes/01- Libraries/coresolution/.idea/coresolution.iml" filepath="$PROJECT_DIR$/../BRCO/Python Codes/01- Libraries/coresolution/.idea/coresolution.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../BRCO/Python Codes/04- CoreInspect/deviceDiscovery/.idea/deviceDiscovery.iml" filepath="$PROJECT_DIR$/../BRCO/Python Codes/04- CoreInspect/deviceDiscovery/.idea/deviceDiscovery.iml" />
+    </modules>
+  </component>
+</project>

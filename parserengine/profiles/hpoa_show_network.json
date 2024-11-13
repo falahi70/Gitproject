@@ -1,0 +1,14 @@
+{
+  "query": "-",
+  "description": "unknown",
+  "defaultipgateway": "$gatewayaddress$",
+  "dhcpenabled": "$dhcpenabled$ | Disabled,False;Enabled,True",
+  "dhcpserver": "unknown",
+  "dnsdomain": "unknown",
+  "dnshostname": "unknown",
+  "interfaceindex": "unknown",
+  "ipaddress": "$ipv4address$",
+  "macaddress": "$macaddress$",
+  "mtu": "unknown",
+  "ipsubnet": "$subnetmask$"
+}

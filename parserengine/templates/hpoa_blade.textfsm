@@ -1,0 +1,14 @@
+Value manufacturer (.*)
+Value caption (.*)
+Value partnumber (.*)
+Value serialnumber (.*)
+Value iloip (.*)
+Value ilomac (.*)
+
+Start
+	^\s+Manufacturer\:\s${manufacturer}
+	^\s+Product Name\:\s${caption}
+	^\s+Part Number\:\s${partnumber}
+	^\s+Serial Number\:\s${serialnumber}
+	^\s+IP Address\:\s${iloip}
+	^\s+MAC Address\:\s${ilomac} -> Record

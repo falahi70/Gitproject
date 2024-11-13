@@ -1,0 +1,320 @@
+HPE BladeSystem Onboard Administrator
+(C) Copyright 2006-2021 Hewlett Packard Enterprise Development LP
+
+OA-Rack6-Right [SCRIPT MODE]> show server info all
+
+
+Server Blade #1 Information:
+	Server Blade Type: No Server Blade Installed
+
+Server Blade #2 Information:
+	Type: Server Blade
+	Manufacturer: HP
+	Product Name: ProLiant BL660c Gen8
+	Part Number: 727959-B21      
+	System Board Spare Part Number: 747358-001
+	Serial Number: CZJ529043H      
+	UUID: 39373237-3935-5A43-4A35-323930343348
+	Server Name: ESX7-2
+	Asset Tag: [Unknown]
+	ROM Version: I32 05/24/2019
+
+	CPU 1:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	CPU 2:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	CPU 3:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	CPU 4:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	Memory: 524288 MB
+
+	FLB Adapter 1: HP FlexFabric 10Gb 2-Port 534FLB Adapter
+	 Ethernet FlexNIC LOM1:1-a            EC:B1:D7:7E:E2:00
+	     FCoE FlexHBA LOM1:1-b            10:00:EC:B1:D7:7E:E2:01
+	 Ethernet FlexNIC LOM1:2-a            EC:B1:D7:7E:E2:04
+	     FCoE FlexHBA LOM1:2-b            10:00:EC:B1:D7:7E:E2:05
+
+	FLB Adapter 2: HP FlexFabric 10Gb 2-Port 534FLB Adapter
+	   Port 1: EC:B1:D7:7E:C3:38
+	   Port 2: EC:B1:D7:7E:C3:3C
+
+	Mezzanine 2: HP LPe1205A 8Gb FC HBA for BladeSystem c-Class
+	   Port 1: 10:00:14:58:d0:b2:f7:ce
+	   Port 2: 10:00:14:58:d0:b2:f7:cf
+
+Management Processor Information:
+	Type: iLO4
+	Name: ILOCZJ529043H
+	Firmware Version: 2.79 Nov 16 2021
+	IP Address: 10.8.25.22
+	MAC Address: EC:B1:D7:86:C8:0F
+	Power Management Controller Version: UNKNOWN
+	iLO Federation Capable: Yes
+
+Server Blade #3 Information:
+	Type: Server Blade
+	Manufacturer: HP
+	Product Name: ProLiant BL660c Gen8
+	Part Number: 727959-B21      
+	System Board Spare Part Number: 747358-001
+	Serial Number: CZJ529042V      
+	UUID: 39373237-3935-5A43-4A35-323930343256
+	Server Name: ESX7-3
+	Asset Tag: [Unknown]
+	ROM Version: I32 05/24/2019
+
+	CPU 1:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	CPU 2:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	CPU 3:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	CPU 4:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	Memory: 524288 MB
+
+	FLB Adapter 1: HP FlexFabric 10Gb 2-Port 534FLB Adapter
+	 Ethernet FlexNIC LOM1:1-a            EC:B1:D7:7E:F3:40
+	 Ethernet FlexNIC LOM1:2-a            EC:B1:D7:7E:F3:44
+
+	FLB Adapter 2: HP FlexFabric 10Gb 2-Port 534FLB Adapter
+	   Port 1: EC:B1:D7:7E:34:88
+	   Port 2: EC:B1:D7:7E:34:8C
+
+	Mezzanine 2: HP LPe1205A 8Gb FC HBA for BladeSystem c-Class
+	   Port 1: 10:00:14:58:d0:b2:f7:22
+	   Port 2: 10:00:14:58:d0:b2:f7:23
+
+Management Processor Information:
+	Type: iLO4
+	Name: ILOCZJ529042V
+	Firmware Version: 2.79 Nov 16 2021
+	IP Address: 10.8.25.23
+	MAC Address: 38:63:BB:2C:CE:B8
+	Power Management Controller Version: UNKNOWN
+	iLO Federation Capable: Yes
+
+Server Blade #4 Information:
+	Type: Server Blade
+	Manufacturer: HP
+	Product Name: ProLiant BL660c Gen8
+	Part Number: 727959-B21      
+	System Board Spare Part Number: 747358-001
+	Serial Number: CZJ529042P      
+	UUID: 39373237-3935-5A43-4A35-323930343250
+	Server Name: ESX7-4
+	Asset Tag: [Unknown]
+	ROM Version: I32 05/24/2019
+
+	CPU 1:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	CPU 2:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	CPU 3:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	CPU 4:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	Memory: 524288 MB
+
+	FLB Adapter 1: HP FlexFabric 10Gb 2-Port 534FLB Adapter
+	 Ethernet FlexNIC LOM1:1-a            EC:B1:D7:7E:E4:10
+	 Ethernet FlexNIC LOM1:2-a            EC:B1:D7:7E:E4:14
+
+	FLB Adapter 2: HP FlexFabric 10Gb 2-Port 534FLB Adapter
+	   Port 1: EC:B1:D7:7E:B4:98
+	   Port 2: EC:B1:D7:7E:B4:9C
+
+	Mezzanine 2: HP LPe1205A 8Gb FC HBA for BladeSystem c-Class
+	   Port 1: 10:00:14:58:d0:b2:f7:c2
+	   Port 2: 10:00:14:58:d0:b2:f7:c3
+
+Management Processor Information:
+	Type: iLO4
+	Name: ILOCZJ529042P
+	Firmware Version: 2.79 Nov 16 2021
+	IP Address: 10.8.25.24
+	MAC Address: 38:63:BB:2C:CE:C4
+	Power Management Controller Version: UNKNOWN
+	iLO Federation Capable: Yes
+
+Server Blade #5 Information:
+	Type: Server Blade
+	Manufacturer: HP
+	Product Name: ProLiant BL660c Gen8
+	Part Number: 727959-B21      
+	System Board Spare Part Number: 747358-001
+	Serial Number: CZJ529043X      
+	UUID: 39373237-3935-5A43-4A35-323930343358
+	Server Name: localhost
+	Asset Tag: [Unknown]
+	ROM Version: I32 05/24/2019
+
+	CPU 1:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	CPU 2:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	CPU 3:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	CPU 4:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	Memory: 524288 MB
+
+	FLB Adapter 1: HP FlexFabric 10Gb 2-Port 534FLB Adapter
+	 Ethernet FlexNIC (NIC 1) LOM1:1-a    EC:B1:D7:7E:32:C0
+	     FCoE FlexHBA LOM1:1-b            10:00:EC:B1:D7:7E:32:C1
+	 Ethernet FlexNIC (NIC 2) LOM1:2-a    EC:B1:D7:7E:32:C4
+	     FCoE FlexHBA LOM1:2-b            10:00:EC:B1:D7:7E:32:C5
+
+	FLB Adapter 2: HP FlexFabric 10Gb 2-Port 534FLB Adapter
+	    NIC 9: EC:B1:D7:7E:32:B8
+	   NIC 10: EC:B1:D7:7E:32:BC
+
+	Mezzanine 2: HP LPe1205A 8Gb FC HBA for BladeSystem c-Class
+	   Port 1: 10:00:14:58:d0:b2:f6:e2
+	   Port 2: 10:00:14:58:d0:b2:f6:e3
+
+Management Processor Information:
+	Type: iLO4
+	Name: ILOCZJ529043X
+	Firmware Version: 2.79 Nov 16 2021
+	IP Address: 10.8.25.25
+	MAC Address: EC:B1:D7:86:C8:26
+	Power Management Controller Version: 3.3.0
+	iLO Federation Capable: Yes
+
+Server Blade #6 Information:
+	Type: Server Blade
+	Manufacturer: HP
+	Product Name: ProLiant BL660c Gen8
+	Part Number: 727959-B21      
+	System Board Spare Part Number: 747358-001
+	Serial Number: CZJ529043C      
+	UUID: 39373237-3935-5A43-4A35-323930343343
+	Server Name: ESXi-24
+	Asset Tag: [Unknown]
+	ROM Version: I32 05/24/2019
+
+	CPU 1:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	CPU 2:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	CPU 3:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	CPU 4:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	Memory: 524288 MB
+
+	FLB Adapter 1: HP FlexFabric 10Gb 2-Port 534FLB Adapter
+	 Ethernet FlexNIC (NIC 1) LOM1:1-a    EC:B1:D7:7E:53:D8
+	     FCoE FlexHBA LOM1:1-b            10:00:EC:B1:D7:7E:53:D9
+	 Ethernet FlexNIC (NIC 2) LOM1:2-a    EC:B1:D7:7E:53:DC
+	     FCoE FlexHBA LOM1:2-b            10:00:EC:B1:D7:7E:53:DD
+
+	FLB Adapter 2: HP FlexFabric 10Gb 2-Port 534FLB Adapter
+	    NIC 9: EC:B1:D7:7E:B4:C8
+	   NIC 10: EC:B1:D7:7E:B4:CC
+
+	Mezzanine 2: HP LPe1205A 8Gb FC HBA for BladeSystem c-Class
+	   Port 1: 10:00:14:58:d0:b2:f7:64
+	   Port 2: 10:00:14:58:d0:b2:f7:65
+
+Management Processor Information:
+	Type: iLO4
+	Name: ILOCZJ529043C
+	Firmware Version: 2.79 Nov 16 2021
+	IP Address: 10.8.25.26
+	MAC Address: EC:B1:D7:86:E8:07
+	Power Management Controller Version: 3.3.0
+	iLO Federation Capable: Yes
+
+Server Blade #7 Information:
+	Type: Server Blade
+	Manufacturer: HP
+	Product Name: ProLiant BL660c Gen8
+	Part Number: 727959-B21      
+	System Board Spare Part Number: 747358-001
+	Serial Number: CZJ5290439      
+	UUID: 39373237-3935-5A43-4A35-323930343339
+	Server Name: ESX6.5-3
+	Asset Tag: [Unknown]
+	ROM Version: I32 05/24/2019
+
+	CPU 1:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	CPU 2:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	CPU 3:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	CPU 4:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	Memory: 524288 MB
+
+	FLB Adapter 1: HP FlexFabric 10Gb 2-Port 534FLB Adapter
+	 Ethernet FlexNIC (NIC 1) LOM1:1-a    EC:B1:D7:7E:32:58
+	     FCoE FlexHBA LOM1:1-b            10:00:EC:B1:D7:7E:32:59
+	 Ethernet FlexNIC (NIC 2) LOM1:2-a    EC:B1:D7:7E:32:5C
+	     FCoE FlexHBA LOM1:2-b            10:00:EC:B1:D7:7E:32:5D
+
+	FLB Adapter 2: HP FlexFabric 10Gb 2-Port 534FLB Adapter
+	    NIC 9: EC:B1:D7:7E:53:C0
+	   NIC 10: EC:B1:D7:7E:53:C4
+
+	Mezzanine 2: HP LPe1205A 8Gb FC HBA for BladeSystem c-Class
+	   Port 1: 10:00:14:58:d0:b2:f7:da
+	   Port 2: 10:00:14:58:d0:b2:f7:db
+
+Management Processor Information:
+	Type: iLO4
+	Name: ILOCZJ5290439
+	Firmware Version: 2.79 Nov 16 2021
+	IP Address: 10.8.25.27
+	MAC Address: EC:B1:D7:86:16:75
+	Power Management Controller Version: 3.3.0
+	iLO Federation Capable: Yes
+
+Server Blade #8 Information:
+	Type: Server Blade
+	Manufacturer: HP
+	Product Name: ProLiant BL660c Gen8
+	Part Number:                 
+	System Board Spare Part Number: 747358-001
+	Serial Number:                 
+	UUID: 00000000-0000-0000-0000-000000000000
+	Server Name: localhost
+	Asset Tag: [Unknown]
+	ROM Version: I32 05/24/2019
+
+	CPU 1:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	CPU 2:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	CPU 3:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	CPU 4:  Intel(R) Xeon(R) CPU E5-4650 v2 @ 2.40GHz (10 cores)
+	Memory: 524288 MB
+
+	FLB Adapter 1: HP FlexFabric 10Gb 2-Port 534FLB Adapter
+	 Ethernet FlexNIC (NIC 1) LOM1:1-a    EC:B1:D7:7E:C3:B8
+	     FCoE FlexHBA LOM1:1-b            10:00:EC:B1:D7:7E:C3:B9
+	 Ethernet FlexNIC (NIC 2) LOM1:2-a    EC:B1:D7:7E:C3:BC
+	     FCoE FlexHBA LOM1:2-b            10:00:EC:B1:D7:7E:C3:BD
+
+	FLB Adapter 2: HP FlexFabric 10Gb 2-Port 534FLB Adapter
+	    NIC 9: EC:B1:D7:7E:C3:C8
+	   NIC 10: EC:B1:D7:7E:C3:CC
+
+	Mezzanine 2: HP LPe1205A 8Gb FC HBA for BladeSystem c-Class
+	   Port 1: 10:00:14:58:d0:b2:f7:8e
+	   Port 2: 10:00:14:58:d0:b2:f7:8f
+
+Management Processor Information:
+	Type: iLO4
+	Name: ILO
+	Firmware Version: 2.79 Nov 16 2021
+	IP Address: 10.8.25.28
+	MAC Address: EC:B1:D7:86:C8:F2
+	Power Management Controller Version: 3.3.0
+	iLO Federation Capable: Yes
+
+Server Blade #9 Information:
+	Server Blade Type: No Server Blade Installed
+
+Server Blade #10 Information:
+	Server Blade Type: Bay Subsumed
+
+Server Blade #11 Information:
+	Server Blade Type: Bay Subsumed
+
+Server Blade #12 Information:
+	Server Blade Type: Bay Subsumed
+
+Server Blade #13 Information:
+	Server Blade Type: Bay Subsumed
+
+Server Blade #14 Information:
+	Server Blade Type: Bay Subsumed
+
+Server Blade #15 Information:
+	Server Blade Type: Bay Subsumed
+
+Server Blade #16 Information:
+	Server Blade Type: Bay Subsumed
+
+
+OA-Rack6-Right [SCRIPT MODE]> 
+
+show server info all

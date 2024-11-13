@@ -1,0 +1,18 @@
+SNMP (version independant)
+==========================
+netNode discovery
+
+	- activeProfile > snmpDiscovery > arpTable > ip+mac > resource
+	- activeProfile > snmpDiscovery > agent-call > JSON result parsing > resource
+
+device discovery
+
+	-  networkNode > hostname/description > resource modifiy > device
+	-  networkNode > agent-call > JSON result parsing > resource modificaiton > device
+
+device inventory
+
+	- device > description != null and operatingSystemType != hypervisor > cred + ip > snmp-call > insert to inventoryDb 
+	- device > description != null and operatingSystemType != hypervisor > cred + ip > agent-call > insert to inventoryDb 
+
+-----------------------------------------------------------------------------------------------------------------------------------

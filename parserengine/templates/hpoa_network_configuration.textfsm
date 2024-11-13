@@ -1,0 +1,12 @@
+Value gatewayaddress (.*)
+Value dhcpenabled (.*)
+Value ipv4address (.*)
+Value macaddress (.*)
+Value subnetmask (.*)
+
+Start
+	^\s+Gateway Address\:\s${gatewayaddress}
+	^\s+DHCP\:\s${dhcpenabled}.* 
+	^\s+IPv4 Address\:\s${ipv4address}
+	^\s+Netmask\:\s${subnetmask}
+	^\s+MAC Address\:\s${macaddress} -> Record

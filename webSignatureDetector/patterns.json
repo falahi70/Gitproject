@@ -1,0 +1,20 @@
+{
+  "ILO": {
+    "url": "$target$:$port$/redfish/v1/",
+    "connection_port": "443",
+    "response_matcher": false,
+    "statuscode_matcher": 200
+  },
+  "MinIO": {
+    "url": "$target$:$port$",
+    "connection_port": "9001",
+    "response_matcher": "MinIO Console",
+    "statuscode_matcher": 200
+  },
+   "EMC": {
+    "url": "$target$:$port$",
+    "connection_port": "9001",
+    "response_matcher": "MinIO Console",
+    "statuscode_matcher": 200
+  }
+}

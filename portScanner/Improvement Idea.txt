@@ -1,0 +1,24 @@
+[+] based on each protocol, create new process and then scan all IP Addresses with new threads for each process.
+
+Protocols = [22, 135, 443, 3389]
+4 New Process:
+	Process-0 [22]
+		Thread-0 [1.1.1.1]
+		Thread-1 [2.2.2.2]
+		Thread-2 [3.3.3.3]
+		...
+	Process-1 [135]
+		Thread-0 [1.1.1.1]
+		Thread-1 [2.2.2.2]
+		Thread-2 [3.3.3.3]
+		...
+	Process-2 [443]
+		Thread-0 [1.1.1.1]
+		Thread-1 [2.2.2.2]
+		Thread-2 [3.3.3.3]
+		...
+	Process-3 [3389]
+		Thread-0 [1.1.1.1]
+		Thread-1 [2.2.2.2]
+		Thread-2 [3.3.3.3]
+		...

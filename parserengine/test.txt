@@ -1,0 +1,4 @@
+Systems available on this Manager:
+  EVA-4000
+  EVA-8100
+  EVA8100-Test1-R4

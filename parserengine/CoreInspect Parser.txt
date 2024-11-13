@@ -1,0 +1,7 @@
+CoreInspect Parser:
+	- main.py --> Executing SSH Commands And Returning Result
+		- Input1: Connection Details
+		- Input2: Parser Name
+Parsers:
+	- Input: SSH Command Output
+	- Output: Parsed Output

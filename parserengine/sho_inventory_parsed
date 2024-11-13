@@ -1,0 +1,16 @@
+[
+   {
+      "name":"2811 chassis",
+      "descr":"2811 chassis",
+      "pid":"CISCO2811",
+      "vid":"V07 ",
+      "sn":"FCZ1401706R"
+   },
+   {
+      "name":"WAN Interface Card - ATM (With multi line G.SHDSL module) on Slot 0 SubSlot 1",
+      "descr":"WAN Interface Card - ATM (With multi line G.SHDSL module)",
+      "pid":"WIC-1SHDSL-V3",
+      "vid":"V02 ",
+      "sn":"FOC12012Q82"
+   }
+]

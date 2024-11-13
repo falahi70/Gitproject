@@ -1,0 +1,3 @@
+netmiko
+ntc_templates
+psycopg2

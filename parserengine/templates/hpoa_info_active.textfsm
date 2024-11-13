@@ -1,0 +1,13 @@
+Value manufacturer (.*)
+Value productname (.*)
+Value firmwareversion (.*)
+Value serialnumber ([A-Za-z0-9]*)
+
+Start
+	^\s+Product Name.*\:\s${productname}
+	^\s+Serial Number.*\:\s${serialnumber}
+	^\s+Manufacturer.*\:\s${manufacturer}
+	^\s+Firmware Ver.*\:\s${firmwareversion} -> Record
+
+
+

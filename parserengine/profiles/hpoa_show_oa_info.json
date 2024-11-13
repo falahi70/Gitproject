@@ -1,0 +1,16 @@
+{
+  "builttype": "Multiprocessor Free",
+  "caption": "$productname$",
+  "buildnumber": "$firmwareversion$",
+  "timezone": "unknown",
+  "installdate": "unknown",
+  "lastbootuptime": "unknown",
+  "manufacturer": "$manufacturer$",
+  "name": "$productname$",
+  "osarchitecture": "64-Bit",
+  "portableoperatingsystem": false,
+  "serialnumber": "$serialnumber$",
+  "version": "$firmwareversion$",
+  "windowsdirectory": "N/A",
+  "osfamily": "hpoa"
+}
