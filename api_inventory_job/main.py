@@ -35,7 +35,7 @@ coresolution_handle.authenticate()
 def get_hostnames():
     hostnames = []
 
-    cpl = "|snippet    \"Get Windows Device\""
+    cpl = "|snippet    \"Get Windows_Linux Devices\""
     result = coresolution_handle.execute_cpl(cpl)
     for item in result:
         hostnames.append(item["hostName"])

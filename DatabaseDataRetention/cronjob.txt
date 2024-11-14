@@ -1,0 +1,1 @@
+0 23  * * 1-4,6 cd /CoreInspect/agents/DatabaseDataRetention && /root/.pyenv/shims/python3 main.py >> /CoreInspect/agents/DatabaseDataRetention/DatabaseDataRetention.log 2>&1

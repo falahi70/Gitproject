@@ -176,5 +176,3 @@ def get_cpl_result(coresolution_schema_name, coresolution_ip_address, coresoluti
     if watch_job_status(job_id):
         job_status, job_results = get_job_results(coresolution_ip, coresolution_schema, job_id)
         return job_results
-
-# job_result = get_cpl_result(coresolution_schema, coresolution_ip, username, password, r'| search creator~"brco\\\\Reza.S"')

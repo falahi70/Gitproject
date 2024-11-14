@@ -35,7 +35,7 @@ scanid = str(int(scanid or 0)+1)
 coresolution_handle.authenticate()
 
 
-targets = coresolution_handle.execute_cpl('''|snippet "MIB2-Inventory"''')
+targets = coresolution_handle.execute_cpl('|snippet "MIB2-Inventory"')
 print("[+] Device Targets Fetched Successfully. Number of Targets:", len(targets))
 
 def validate_ip(s):
@@ -145,9 +145,7 @@ def get_snmp_data(target, oid):
     if target["snmpVersion"] in ("2" or "1"):
         try:
             community = fetched_credentials[target["credentialName"]]["username"]
-            #command = fr'SnmpWalk.exe -v:{target["snmpVersion"]} -r:"{ipaddress}" -c:"{community}" -os:"{start_oid}" -op:"{end_oid}"'
-            command = fr'snmpwalk -v {target["snmpVersion"]} -c {community} {ipaddress} {start_oid} {end_oid} -O nQT'
-            #print("version2: ", command)
+            command = fr'snmpwalk -v 2c -c {community} {ipaddress} {start_oid} {end_oid} -O nQT'
         except Exception as e :
             print("[Error] in cred assigning:\n\t",e)
 

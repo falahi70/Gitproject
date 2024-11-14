@@ -1,0 +1,85 @@
+CREATE SEQUENCE bootconfigurationsequence;
+
+ALTER SEQUENCE bootconfigurationsequence OWNED BY "bootConfiguration".id;
+
+CREATE SEQUENCE cdromdrivesequence;
+
+ALTER SEQUENCE cdromdrivesequence OWNED BY "cdromDrive".id;
+
+CREATE SEQUENCE computersystemsequence;
+
+ALTER SEQUENCE computersystemsequence OWNED BY "computerSystem".id;
+
+CREATE SEQUENCE diskdrivesequence;
+
+ALTER SEQUENCE diskdrivesequence OWNED BY "diskDrive".id;
+
+ALTER SEQUENCE groupsequence OWNED BY "group".id;
+
+CREATE SEQUENCE groupUsersequence;
+
+ALTER SEQUENCE groupUsersequence OWNED BY "groupUser".id;
+
+CREATE SEQUENCE logicaldisksequence;
+
+ALTER SEQUENCE logicaldisksequence OWNED BY "logicalDisk".id;
+
+CREATE SEQUENCE networkadaptersequence;
+
+ALTER SEQUENCE networkadaptersequence OWNED BY "networkAdapter".id;
+
+CREATE SEQUENCE networkadapterconfigurationsequence;
+
+ALTER SEQUENCE networkadapterconfigurationsequence OWNED BY "networkAdapterConfiguration".id;
+
+CREATE SEQUENCE operatingsystemsequence;
+
+ALTER SEQUENCE operatingsystemsequence OWNED BY "operatingSystem".id;
+
+CREATE SEQUENCE physicalmemorysequence;
+
+ALTER SEQUENCE physicalmemorysequence OWNED BY "physicalMemory".id;
+
+CREATE SEQUENCE printersequence;
+
+ALTER SEQUENCE printersequence OWNED BY printer.id;
+
+CREATE SEQUENCE printerconfigurationsequence;
+
+ALTER SEQUENCE printerconfigurationsequence OWNED BY "printerConfiguration".id;
+
+CREATE SEQUENCE processorsequence;
+
+ALTER SEQUENCE processorsequence OWNED BY processor.id;
+
+CREATE SEQUENCE productsequence;
+
+ALTER SEQUENCE productsequence OWNED BY product.id;
+
+CREATE SEQUENCE quickfixengineeringsequence;
+
+ALTER SEQUENCE quickfixengineeringsequence OWNED BY "quickFixEngineering".id;
+
+CREATE SEQUENCE servicesequence;
+
+ALTER SEQUENCE servicesequence OWNED BY service.id;
+
+CREATE SEQUENCE startupcommandsequence;
+
+ALTER SEQUENCE startupcommandsequence OWNED BY "startupCommand".id;
+
+CREATE SEQUENCE systemdriversequence;
+
+ALTER SEQUENCE systemdriversequence OWNED BY "systemDriver".id;
+
+CREATE SEQUENCE usbcontrollersequence;
+
+ALTER SEQUENCE usbcontrollersequence OWNED BY "usbController".id;
+
+CREATE SEQUENCE usbcontrollerdevicesequence;
+
+ALTER SEQUENCE usbcontrollerdevicesequence OWNED BY "usbControllerDevice".id;
+
+CREATE SEQUENCE useraccountsequence;
+
+ALTER SEQUENCE useraccountsequence OWNED BY "userAccount".id;

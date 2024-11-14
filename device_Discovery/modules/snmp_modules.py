@@ -258,7 +258,7 @@ def execute_snmp_jobs(target_list, target_oid=False, output_fieldname="hostname"
             }
         elif int(version) != 1:
             credentials = {
-                "community": connection_data.get("password", "")
+                "community": connection_data.get("community", "")
             }
         else:
             credentials = False

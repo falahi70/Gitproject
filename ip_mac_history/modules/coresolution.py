@@ -179,9 +179,10 @@ class coresolution():
 
         credential_name = connection_information["credential"]["name"]
         credential_handle = self.get_credential(credential_name)
+        username, password = credential_handle["username"], credential_handle["password"]
 
         snmp3_details = {}
-        connection_handle_options = connection_information.get("options", [])
+        connection_handle_options = connection_information["options"]
         options_key = ["Port",
                        "AuthType",
                        "PrivacyType",
@@ -192,30 +193,18 @@ class coresolution():
             if option["key"] in options_key:
                 snmp3_details[option["key"]] = option["value"]
 
+        snmpv3_credential = {
+            "username": username,
+            "authentication_type": snmp3_details["AuthType"],
+            "authentication_phrase": password,
+            "encryption_type": snmp3_details["PrivacyType"],
+            "encryption_phrase": snmp3_details["PrivacyPhrase"],
+            "port": snmp3_details.get("Port", "N/A"),
+            "version": snmp3_details.get("version", "N/A")
+        }
 
-        if int(snmp3_details["Version"]) == 2:
-            credential_object = {
-                "version": 2,
-                "community": credential_handle["community"]
-            }
-            return credential_object
 
-        elif int(snmp3_details["Version"]) == 3:
-            username, password = credential_handle["username"], credential_handle["password"]
-            snmpv3_credential = {
-                "username": username,
-                "authentication_type": snmp3_details.get("AuthType", False),
-                "authentication_phrase": password,
-                "encryption_type": snmp3_details.get("PrivacyType", False),
-                "encryption_phrase": snmp3_details.get("PrivacyPhrase", False),
-                "port": snmp3_details.get("Port", "N/A"),
-                "version": 3
-            }
-            return snmpv3_credential
-
-        else:
-            return {"version": 1}
-
+        return snmpv3_credential
 
     def create_scenario(self, scenario_name, scenario_severity, definition):
         resource_body = {
@@ -544,7 +533,6 @@ class coresolution():
         if watch_job_status(job_id):
             job_status, job_results = get_job_results(job_id)
             if job_status:
-                print("[+] Job Executed Successfully.")
                 return job_results
             else:
                 print("[-] Failed To Execute job.")
@@ -559,8 +547,3 @@ class coresolution():
             monitortemplate_key = monitortemplate["Key"]
             result[monitortemplate_name] = monitortemplate_key
         return result
-
-# coresolution_handle = coresolution("https", "10.0.13.144", "CoreInspect", "CoreInspect")
-# coresolution_handle.authenticate()
-# scanid = coresolution_handle.fetch_global_variables("scanid")
-# coresolution_handle.change_global_variable("scanid", "Int", str(int(scanid)+1))

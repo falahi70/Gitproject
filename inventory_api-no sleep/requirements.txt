@@ -1,0 +1,6 @@
+fastapi==0.88.0
+Flask==2.2.2
+httpx==0.23.3
+psycopg2==2.9.3
+pydantic==1.10.4
+uvicorn==0.20.0

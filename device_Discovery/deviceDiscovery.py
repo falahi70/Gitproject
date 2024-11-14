@@ -14,9 +14,7 @@ import subprocess
 import paramiko
 from multiprocessing.pool import ThreadPool
 import argparse
-import win32file
 
-win32file._setmaxstdio(4096)
 urllib3.disable_warnings()
 config = load_config()
 # paramiko.util.log_to_file('NUL')
@@ -109,154 +107,6 @@ def execute_get_result(command, data_object={}):
     return data_object
 
 port_scan_result = []
-def wmi_discovery(scanid, coresolution_handle, config, thread_count):
-    global wmi_discovery_thread_results
-    global port_scan_result
-    print("[WMI] Agent Started.")
-
-    def tcp_single_ip_single_port_scan(target, port):
-        global port_scan_result
-        port = int(port)
-        tmp_target = target.copy()
-        target_ipaddress = target["ipaddress_string"]
-        try:
-            tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            tcp.settimeout(2)
-            result = tcp.connect_ex((target_ipaddress, port))
-            # print(result)
-            if result == 0:
-                tmp_target["islive"] = True
-            else:
-                tmp_target["islive"] = False
-
-            port_scan_result.append(tmp_target.copy())
-
-        except Exception as e:
-            print(e)
-            sys.exit()
-
-    targets = []
-    print("[WMI] Fetching Network Nodes.")
-    network_nodes = coresolution_handle.execute_cpl(config["wmi_discovery_coresolution_cpl"])
-    for network_node in network_nodes:
-        tmp_data = {}
-        tmp_data["network_node_key"] = network_node["networkNodeKey"]
-        tmp_data["network_node_ipaddress"] = network_node["networkNodeIPAddress"]
-        tmp_data["ipaddress_string"] = str(ipaddress.ip_address(int(network_node["networkNodeIPAddress"])))
-        tmp_data["credential_profile"] = network_node["credentialProfile"]
-        tmp_data["credential_name"] = network_node["cred"]
-        targets.append(tmp_data.copy())
-
-    if debug_ip:
-        test_targets = []
-        for target in targets:
-            if target["ipaddress_string"] == options.ipaddress:
-                test_targets.append(target.copy())
-        targets = test_targets.copy()
-
-
-
-    # targets = targets[:20]
-    # target1 = {'network_node_key': 'NETNOD-938370', 'network_node_ipaddress': 168431130, 'ipaddress_string': '10.10.14.26', 'credential_profile': 'CRDPF-36', 'credential_name': 'WMI-Credential'}
-    # target2 = {'network_node_key': 'NETNOD-938370', 'network_node_ipaddress': 167781695, 'ipaddress_string': '10.0.37.63', 'credential_profile': 'CRDPF-36', 'credential_name': 'WMI-Credential'}
-    # targets = [target1, target2]
-    print(f"[WMI] Network Nodes Length: [{len(targets)}]")
-    print(f"[WMI] Running Port Scan. ({current_time()})")
-
-    portscan_thread_count = int(len(targets)/4)
-    if portscan_thread_count < 1:
-        portscan_thread_count = 1
-    pool = ThreadPool(processes=portscan_thread_count)
-    results = []
-    while (targets):
-        target = targets.pop()
-        results.append(pool.apply_async(tcp_single_ip_single_port_scan, (target, 135,)))
-
-    pool.close()  # Done adding tasks.
-    pool.join()  # Wait for all tasks to complete.
-    print(f"[WMI] Finished Port Scan. ({current_time()})")
-
-    targets = port_scan_result
-    if debug_ip:
-        print(f"[!] Targets after PortScan: {targets}")
-
-    del port_scan_result
-
-    wmi_thread_count = int(thread_count)
-    # targets = targets[:50]
-    live_addresses = 0
-    for target in targets:
-        if target["islive"]:
-            live_addresses += 1
-
-    print(f"[WMI] WMI Targets: [{live_addresses}]")
-
-    pool = ThreadPool(processes=wmi_thread_count)
-    results = []
-
-    print(f"[WMI] Discovery Threads Started. ({current_time()})")
-    fetched_credentials = {}
-    def fetch_credential_data(credential_name):
-        if credential_name not in fetched_credentials.keys():
-            credential_data = coresolution_handle.get_credential(credential_name)
-            if credential_data:
-                target_username = credential_data["username"]
-                target_password = credential_data["password"]
-            else:
-                target_username = False
-                target_password = False
-            fetched_credentials[credential_name] = {"username": target_username,
-                                                    "password": target_password}
-        else:
-            target_username = fetched_credentials[credential_name]["username"]
-            target_password = fetched_credentials[credential_name]["password"]
-        return target_username, target_password
-
-    while (targets):
-        target = targets.pop()
-        target["id"] = str(generate_new_GUID())
-        target["createdtime"] = current_time()
-        target["scanid"] = scanid
-        target["scan_type"] = "WMI"
-
-        if not target["islive"]:
-            target["error"] = "[-] Port 135 Is Closed."
-            target["status"] = -1
-            results.append(target.copy())
-            continue
-        credential_name = target['credential_name']
-        if debug_ip:
-            print(f"[!] Target Credential Name: {credential_name}")
-        target_username, target_password = fetch_credential_data(credential_name)
-        if debug_ip:
-            print(f"[!] User/Pass: {target_username}:{target_password}")
-        if not target_username and not target_password:
-            target["error"] = "[-] Port 135 Is Closed."
-            target["status"] = -1
-            results.append(target.copy())
-            continue
-
-        if not os.path.exists(f"{credential_name}.cred"):
-            file_handle = open(f"{credential_name}.cred", "w", encoding="utf-8", errors="ignore")
-            file_handle.write(target_password)
-            file_handle.close()
-        target_address = target['ipaddress_string']
-
-        finalQuery = f"powershell -c \"$passtxt=Get-Content {credential_name}.cred;$password = convertto-securestring -String $passtxt -AsPlainText -Force;$username='{target_username}';$credential = New-Object System.Management.Automation.PSCredential -ArgumentList ($username, $password);get-WmiObject -Query 'select Name, Domain from win32_computersystem' -ComputerName {target_address} -Credential $credential | Select-Object Name, Domain | ConvertTo-Json\""
-        if debug_ip:
-            print(f"[!] finalQuery: {finalQuery}")
-        results.append(pool.apply_async(execute_get_result, (finalQuery, target, ),))
-
-    pool.close()  # Done adding tasks.
-    pool.join()  # Wait for all tasks to complete.
-    # results = [result.get() for result in results]
-    print(f"[WMI] Discovery Threads Finished. ({current_time()})")
-    final_results = []
-    for result in wmi_discovery_thread_results:
-        final_results.append(result.copy())
-
-    return final_results
-
 
 ### SNMP Discovery Section ###
 def snmp_discovery(snmp_target_list, config):
@@ -597,7 +447,6 @@ def create_csv(headers, values, outputname):
 ### SSH Discovery Section ###
 def ssh_discovery(ssh_target_list, config, thread_count=30, connection_details={}):
     def get_ssh_information(target_details):
-        print(target_details)
         target_ipaddress = target_details["ipaddress_string"]
         target_port = target_details["open_port"]
         target_username = target_details["credential"]["username"]
@@ -610,10 +459,10 @@ def ssh_discovery(ssh_target_list, config, thread_count=30, connection_details={
         except Exception as e:
             target_details["status"] = -1
             target_details["error"] = str(e).replace(";", "")
-            return False
+            #return False
 
         try:
-            ssh_stdin, ssh_stdout, ssh_stderr = ssh.exec_command(target_command)
+            ssh_stdin, ssh_stdout, ssh_stderr = ssh.exec_command(target_command, timeout=5)
             command_output = ssh_stdout.read().decode(encoding="utf-8", errors="ignore")
             command_output = json.loads(command_output)
             ssh.close()
@@ -624,26 +473,12 @@ def ssh_discovery(ssh_target_list, config, thread_count=30, connection_details={
         except Exception as e:
             target_details["status"] = -1
             target_details["error"] = str(e)
-            return False
-
+            #return False
         return target_details.copy()
 
     print("[*] Started SSH Discovery Phase.")
-    # coresolution_network_nodes = coresolution_handle.execute_cpl(config["ssh_discovery_coresolution_cpl"])
-    # if len(ssh_target_list) < 1:
-    #     # print(f"[-] No network node found.\n[CPL Result] {coresolution_network_nodes}")
-    #     return []
-
-    # coresolution_network_nodes = coresolution_network_nodes[:2]
-    # tmp_data = {'_backgroundKey': 'NETNOD-977640', 'defaultNetworkNode': 'NETNOD-977640', 'ipAddress': '10.0.13.47',
-    #             'credentialProfile': 'CRDPF-38', 'discoveredConnectionMethod': 'ssh', 'openport': 22,
-    #             'cred': 'linux-Credential', 'query': 'cat /home/coreinspect/InventoryResult'}
-    # coresolution_network_nodes.append(tmp_data)
-
     target_list = []
     added_ipaddresses = []
-
-
     for network_node in ssh_target_list:
         if debug_ip:
             if network_node.get("ipAddress", "0.0.0.0") != options.ipaddress:
@@ -666,14 +501,10 @@ def ssh_discovery(ssh_target_list, config, thread_count=30, connection_details={
             tmp_target["open_port"] = int(connection_information.get("port", "22"))
         except Exception as e:
             tmp_target["open_port"] = 22
-
-
         tmp_target["scan_type"] = "SSH"
-        tmp_target["query"] = network_node.get("query", "cat /home/coreinspect/InventoryResult")
+        tmp_target["query"] = network_node.get("query", "cat /home/coreins/InventoryResult")
         target_list.append(tmp_target.copy())
-    # del coresolution_network_nodes
-
-
+ 
     pool = ThreadPool(processes=thread_count)
     results = []
     started = current_time()
@@ -900,28 +731,18 @@ for connection in target_connection_names:
         credential_data = coresolution_handle.get_credential(credential_name)
         target_username = credential_data.get("username", "")
         target_password = credential_data.get("password", "")
+        target_community = credential_data.get("community", "")
     else:
         target_username = "N/A"
         target_password = "N/A"
+        target_community = "N/A"
 
     connection_model["credential_name"] = credential_name
     connection_model["username"] = target_username
     connection_model["password"] = target_password
+    connection_model["community"] = target_community
 
     target_connection_details[connection] = connection_model.copy()
-
-
-### WMI Discovery Handle ###
-# if "wmi" in target_types or "all" in target_types:
-#     try:
-#         wmi_discovered_devices = wmi_discovery(scanid, coresolution_handle, config, 30)
-#         wmi_insert_data = handle_scanid_result(wmi_discovered_devices, "WMI")
-#         if debug_ip:
-#             print(f"[!] wmi_discovered_devices: {wmi_discovered_devices}")
-#         else:
-#             json2db("WMI", wmi_insert_data)
-#     except Exception as e:
-#         print(f"[-] Error in WMI Discovery.\n[Err] {e}")
 
 
 ### SNMP Discovery Handle ###
@@ -984,6 +805,7 @@ if "ssh" in target_types or "all" in target_types:
         print(f"[!] ssh_discovery_result: {ssh_discovery_result}")
     else:
         json2db("SSH", ssh_insert_data)
+        print("Insert To DB")
     # try:
     #     ssh_discovery_result = ssh_discovery(scanid, coresolution_handle, config)
     #     if debug_ip:

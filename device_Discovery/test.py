@@ -3,10 +3,10 @@ import json
 
 
 coresolution_handle = coresolution("https",
-                                   "iam.mtnirancell.ir",
-                                   "system",
-                                   "1qaz!QAZ")
+                                   "192.168.161.35",
+                                   "coreinspectapiuser",
+                                   "Abcd123")
 coresolution_handle.authenticate()
 
-data = coresolution_handle.get_credential("mailUser")
+data = coresolution_handle.get_credential("snmpv2")
 print(json.dumps(data))

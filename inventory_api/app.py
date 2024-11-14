@@ -11,6 +11,7 @@ import os
 import zipfile
 import base64
 from pydantic import BaseModel
+import time
 
 app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 security = HTTPBasic()
@@ -38,7 +39,7 @@ def validate_credential(username, password):
 
 @app.get("/openapi.json")
 async def get_open_api_endpoint():
-    return JSONResponse(get_openapi(title="FastAPI", version=1, routes=app.routes))
+    return JSONResponse(get_openapi(title="FastAPI", version="1", routes=app.routes))
 
 @app.get("/docs")
 async def get_documentation():
@@ -218,8 +219,6 @@ async def check_queue(request: Request,
     if not validate_credential(user_username, user_password):
         hit_access_log(user_hostname, request, response="Invalid credential provided.")
         raise HTTPException(status_code=403, detail=f"Invalid credential provided.")
-
-
     hash_check_sql = f"select * from server_management.allowed_hash where md5_hash='{file_hash.lower()}' and enabled=1"
     print(hash_check_sql)
     fetched_data = database_handle.fetch_sql(hash_check_sql)
@@ -229,11 +228,11 @@ async def check_queue(request: Request,
 
     user_job = database_handle.pick_job(user_hostname)
     print(f"[!] user_job: {user_job}")
-    hostname_check_query = f"select * from asset_inventory.\"computerSystem\" where hostname='{user_hostname}' AND osfamily ='windows' AND createdtime > current_date - interval '4' day LIMIT 1"
+    hostname_check_query = f"select * from asset_inventory.\"computerSystem\" where hostname='{user_hostname}' AND createdtime > current_date LIMIT 1"
     print(f"[!] Query: {hostname_check_query}")
     hostname_scanned = database_handle.fetch_sql(hostname_check_query)
     # print(f"[!] hostname_scanned: {hostname_scanned}")
-
+    time.sleep(10)
     if user_job:
         user_job["queue_status"] = 1
         database_handle.json_update("server_management", "queue", user_job.copy())
@@ -264,19 +263,34 @@ def upload(request: Request,
            file: UploadFile = File(...),
            credential: str = Form(...)):
 
-
-    hostname_uploaded_filename = str(file.filename).replace(".zip", "")
+    if 'linux' not in file.filename.lower():
+        hostname_uploaded_filename = str(file.filename).replace(".zip", "")
+    else:
+        hostname_uploaded_filename = str(file.filename).split('___')[0].replace(".zip", "")
+    sender_ipaddress = request.client.host
     user_job = database_handle.pick_job(hostname_uploaded_filename, inventory_endpoint=True)
     if not user_job:
         hit_access_log(hostname_uploaded_filename, request, response="No job defined.")
         raise HTTPException(status_code=403, detail=f"No job defined.")
 
-    saved_filename = f'{hostname_uploaded_filename}_{current_time(True)}.zip'
+    if 'linux' not in file.filename.lower():
+        saved_filename = f'{hostname_uploaded_filename}___{sender_ipaddress}___{current_time(True)}.zip'
+    else:
+        saved_filename = f'{hostname_uploaded_filename}___{sender_ipaddress}___linux___{current_time(True)}.zip'
 
     try:
+        delete_command = f'rm -f /CoreInspect/agents/inventory_api/{hostname_uploaded_filename}___{sender_ipaddress}___*.zip'
+        subprocess.run(delete_command, shell=True, check=True)
+        print(f"Removed old files with pattern: {hostname_uploaded_filename}___{sender_ipaddress}___*.zip")
+
         contents = file.file.read()
         with open(saved_filename, 'wb') as f:
             f.write(contents)
+    
+    except subprocess.CalledProcessError as e:
+        print(f"Error deleting old files: {e}")
+        raise HTTPException(status_code=503, detail=f"Failed to delete old files.")
+
     except Exception:
         hit_access_log(hostname_uploaded_filename, request, response="Failed to process uploaded file.")
         raise HTTPException(status_code=503, detail=f"Failed to process uploaded file.")

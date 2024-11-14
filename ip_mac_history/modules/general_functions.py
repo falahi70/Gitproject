@@ -4,7 +4,8 @@ import ipaddress
 
 
 def generate_new_GUID():
-    uuidFour = uuid.uuid4()
+    uuidFour = str(uuid.uuid4())
+    uuidFour = uuidFour.replace("}", "").replace("{", "")
     return uuidFour
 
 def current_time():
@@ -19,25 +20,15 @@ def create_csv(headers, values, outputname):
 
     header_str = ",".join(headers)
     output_handle.write(f"{header_str}\n")
-    for value in values:
-        tmp_model = {
-            "id": value[0],
-            "discoverynodeip": value[2],
-            "mac": value[4],
-            "ip": value[5],
-            "createdtime": value[3],
-            "discoverytype": value[6],
-            "scanid": value[1]
-        }
+
+    for data in values:
         tmp_string = ""
         for column in headers:
-            data = tmp_model.get(column, "")
-            data = str(data).strip()
-            tmp_string += f"{data},"
+            write_data = str(data.get(column, "N/A"))
+            # write_data = write_data.replace(",", "")
+            # write_data = write_data.replace('"', '""')
+            tmp_string += f"{write_data};"
         tmp_string = tmp_string[:-1]
-        #value = [str(a) for a in value]
-        #value = [a.replace(",", "") for a in value]
-        #value_data = ",".join(value)
         output_handle.write(f"{tmp_string}\n")
 
     output_handle.close()
